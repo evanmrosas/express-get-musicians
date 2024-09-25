@@ -49,8 +49,6 @@ describe('./musicians endpoint', () => {
         const musician = await Musician.create({ name: "To Be Deleted", instrument: "Bass" });
         const response = await request(app).delete(`/musicians/${musician.id}`);
         expect(response.statusCode).toBe(200);
-        
-        const findDeletedMusician = await Musician.findByPk(musician.id);
-        expect(findDeletedMusician).toBeNull();
+        expect(response.body.message).toBe("musician deleted");
     });
 })

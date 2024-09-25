@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Musician = require("../../models/index")
+const {Musician} = require("../../models/index")
 const db = require("../../db/connection");
 
 router.use(express.json())
@@ -33,5 +33,6 @@ router.delete("/:id", async (req, res) => {
     const id = req.params.id
     const deleteMusician = await Musician.findByPk(id)
     await deleteMusician.destroy()
+    res.status(200).json({message: "musician deleted"})
 })
 module.exports = router;
